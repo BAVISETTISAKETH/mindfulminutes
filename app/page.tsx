@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { BarChart3, Brain, Play, History, Flame, TrendingUp, GitBranch, FlaskConical, ArrowRight, Check } from "lucide-react";
+import { BarChart3, Brain, Play, History, Flame, TrendingUp, GitBranch, FlaskConical, ArrowRight } from "lucide-react";
 
 const techStack = [
   "Next.js 14", "TypeScript", "Tailwind CSS v4", "Firebase v10",
