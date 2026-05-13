@@ -1,12 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useAuthStore } from "@/store/auth-store";
-import { Brain, LayoutDashboard, Users, TrendingDown, GitBranch, FlaskConical, LogOut } from "lucide-react";
-import { signOut } from "firebase/auth";
-import { auth } from "@/lib/firebase";
+import { Brain, LayoutDashboard, TrendingDown, GitBranch, FlaskConical, LogIn } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
@@ -17,22 +14,8 @@ const navItems = [
 ];
 
 export default function AnalyticsLayout({ children }: { children: React.ReactNode }) {
-  const router = useRouter();
   const pathname = usePathname();
-  const { user, loading } = useAuthStore();
-
-  useEffect(() => {
-    if (!loading && (!user || !user.isAdmin)) {
-      router.replace("/login");
-    }
-  }, [user, loading, router]);
-
-  if (loading || !user?.isAdmin) return null;
-
-  async function handleSignOut() {
-    await signOut(auth);
-    router.replace("/login");
-  }
+  const { user } = useAuthStore();
 
   return (
     <div className="min-h-screen bg-[#0F1117] text-white flex">
@@ -44,7 +27,7 @@ export default function AnalyticsLayout({ children }: { children: React.ReactNod
           </div>
           <div>
             <p className="text-sm font-semibold leading-none">MindfulMinutes</p>
-            <p className="text-xs text-white/40">Analytics</p>
+            <p className="text-xs text-white/40">Analytics · Demo</p>
           </div>
         </Link>
 
@@ -66,21 +49,24 @@ export default function AnalyticsLayout({ children }: { children: React.ReactNod
           ))}
         </nav>
 
-        <div className="mt-auto space-y-2">
-          <Link
-            href="/dashboard"
-            className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-white/50 hover:text-white hover:bg-white/5 transition-colors"
-          >
-            <Users className="h-4 w-4" />
-            User app
-          </Link>
-          <button
-            onClick={handleSignOut}
-            className="w-full flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-white/50 hover:text-white hover:bg-white/5 transition-colors"
-          >
-            <LogOut className="h-4 w-4" />
-            Sign out
-          </button>
+        <div className="mt-auto">
+          {user ? (
+            <Link
+              href="/dashboard"
+              className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-white/50 hover:text-white hover:bg-white/5 transition-colors"
+            >
+              <LogIn className="h-4 w-4" />
+              Go to app
+            </Link>
+          ) : (
+            <Link
+              href="/login"
+              className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-white/50 hover:text-white hover:bg-white/5 transition-colors"
+            >
+              <LogIn className="h-4 w-4" />
+              Sign in
+            </Link>
+          )}
         </div>
       </aside>
 

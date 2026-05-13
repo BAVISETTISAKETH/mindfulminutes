@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Brain, Loader2 } from "lucide-react";
+import { Brain, Loader2, BarChart3 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export default function LoginPage() {
@@ -46,6 +46,20 @@ export default function LoginPage() {
   }
 
   return (
+    <div className="space-y-3">
+      {/* Demo banner */}
+      <Link
+        href="/analytics/overview"
+        className="flex items-center gap-3 rounded-xl border border-primary/30 bg-primary/5 px-4 py-3 text-sm hover:bg-primary/10 transition-colors"
+      >
+        <BarChart3 className="h-5 w-5 text-primary shrink-0" />
+        <div>
+          <p className="font-medium text-primary">View Analytics Dashboard</p>
+          <p className="text-xs text-muted-foreground">No login required — explore the demo data</p>
+        </div>
+        <span className="ml-auto text-primary">→</span>
+      </Link>
+
     <Card className="border-0 shadow-xl">
       <CardHeader className="space-y-1 text-center">
         <div className="flex justify-center mb-2">
@@ -122,5 +136,6 @@ export default function LoginPage() {
         </p>
       </CardContent>
     </Card>
+    </div>
   );
 }
