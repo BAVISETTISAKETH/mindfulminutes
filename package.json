@@ -9,7 +9,8 @@
     "lint": "next lint",
     "format": "prettier --write .",
     "seed": "tsx lib/seed.ts",
-    "seed:small": "tsx lib/seed.ts -- --small"
+    "seed:small": "tsx lib/seed.ts -- --small",
+    "deploy": "next build && firebase deploy --only hosting"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.2",
